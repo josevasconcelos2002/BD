@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
 
 -- -----------------------------------------------------
 -- Schema mydb
@@ -19,7 +20,7 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Genero` (
   `genero_id` INT NOT NULL,
-  `genero_descricao` VARCHAR(45) NOT NULL,
+  `genero_descricao` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`genero_id`))
 ENGINE = InnoDB;
 
@@ -29,7 +30,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Tipo` (
   `tipo_id` INT NOT NULL,
-  `tipo_descricao` VARCHAR(45) NOT NULL,
+  `tipo_descricao` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`tipo_id`))
 ENGINE = InnoDB;
 
@@ -39,7 +40,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Marca` (
   `marca_id` INT NOT NULL,
-  `marca_descricao` VARCHAR(255) NOT NULL,
+  `marca_descricao` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`marca_id`));
 
 
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PecaDeRoupa` (
   `tamanho` VARCHAR(10) NOT NULL,
   `stock` INT NOT NULL,
   `cor` VARCHAR(45) NOT NULL,
-  `peca_descricao` VARCHAR(255) NOT NULL,
+  `peca_descricao` MEDIUMTEXT NOT NULL,
   `precovenda` DECIMAL(8,2) NOT NULL,
   `promocao` INT NULL,
   `genero_id` INT NOT NULL,
@@ -99,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Colecao` (
   `colecao_id` INT NOT NULL,
   `colecao_nome` VARCHAR(75) NOT NULL,
   `ano` DATE NOT NULL,
-  `colecao_descricao` VARCHAR(255) NOT NULL,
+  `colecao_descricao` MEDIUMTEXT NOT NULL,
   `estacao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`colecao_id`));
 
@@ -132,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PecaFornecedor` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Localizacao` (
   `loc_id` INT NOT NULL,
-  `loc_descricao` VARCHAR(45) NOT NULL,
+  `loc_descricao` MEDIUMTEXT NOT NULL,
   `loc_rua` VARCHAR(100) NOT NULL,
   `loc_localizacao` VARCHAR(100) NOT NULL,
   `loc_codigopostal` VARCHAR(45) NOT NULL,
@@ -163,16 +164,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`RoupaLocalizacao` (
   `pecaLoc_quantidade` INT NOT NULL,
-  `peca_id` INT NULL,
-  `loc_id` INT NULL,
-  INDEX `peca_id_idx` (`peca_id` ASC) VISIBLE,
-  INDEX `loc_id_idx` (`loc_id` ASC) VISIBLE,
-  CONSTRAINT `peca_id`
+  `peca_id` INT NOT NULL,
+  `loc_id` INT NOT NULL,
+  INDEX `idLocalizacaoFK_idx` (`loc_id` ASC) VISIBLE,
+  CONSTRAINT `idPeçaFK1`
     FOREIGN KEY (`peca_id`)
     REFERENCES `mydb`.`PecaDeRoupa` (`peca_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `loc_id`
+  CONSTRAINT `idLocalizacaoFK`
     FOREIGN KEY (`loc_id`)
     REFERENCES `mydb`.`Localizacao` (`loc_id`)
     ON DELETE NO ACTION
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ColecaoFornecedor` (
   PRIMARY KEY (`peca_id`, `for_NIF`, `colecao_id`),
   INDEX `idFornecedor_idx` (`for_NIF` ASC) VISIBLE,
   INDEX `idColecaoFK_idx` (`colecao_id` ASC) VISIBLE,
-  CONSTRAINT `idPeçaFK0`
+  CONSTRAINT `idPeçaFK2`
     FOREIGN KEY (`peca_id`)
     REFERENCES `mydb`.`PecaDeRoupa` (`peca_id`)
     ON DELETE NO ACTION

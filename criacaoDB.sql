@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PecaFornecedor` (
   `for_NIF` INT NOT NULL,
   PRIMARY KEY (`peca_id`, `for_NIF`),
   INDEX `idFornecedor_idx` (`for_NIF` ASC) VISIBLE,
-  CONSTRAINT `idPeçaFK`
+  CONSTRAINT `idPeçaFK_PecaFornecedor` -- Nome único para a restrição
     FOREIGN KEY (`peca_id`)
     REFERENCES `mydb`.`PecaDeRoupa` (`peca_id`)
     ON DELETE NO ACTION
@@ -125,7 +125,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PecaFornecedor` (
     FOREIGN KEY (`for_NIF`)
     REFERENCES `mydb`.`Fornecedor` (`NIF`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE NO ACTION
+);
+
 
 
 -- -----------------------------------------------------
@@ -193,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ColecaoFornecedor` (
   PRIMARY KEY (`peca_id`, `for_NIF`, `colecao_id`),
   INDEX `idFornecedor_idx` (`for_NIF` ASC) VISIBLE,
   INDEX `idColecaoFK_idx` (`colecao_id` ASC) VISIBLE,
-  CONSTRAINT `idPeçaFK2`
+  CONSTRAINT `idPeçaFK_ColecaoFornecedor` -- Nome único para a restrição
     FOREIGN KEY (`peca_id`)
     REFERENCES `mydb`.`PecaDeRoupa` (`peca_id`)
     ON DELETE NO ACTION
@@ -207,9 +209,5 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ColecaoFornecedor` (
     FOREIGN KEY (`colecao_id`)
     REFERENCES `mydb`.`Colecao` (`colecao_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+    ON UPDATE NO ACTION
+);

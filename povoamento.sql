@@ -96,15 +96,14 @@ INSERT INTO colecaofornecedor
 
 --
 -- Povoamento da tabela "fornecedor"
-INSERT INTO fornecedor 
-	(NIF, for_nome, for_rua, for_email, for_Localidade, for_codigopostal)
-	VALUES 
-		(10549492, 'EntregaRoup.lda', 'Rua da Liberdade', 'email1@example.com', 'Lisboa', '12345-678'),
-		(51916191, 'Roupa&Roupinha', 'Avenida Infante Dom Henrique', 'email2@example.com', 'Porto', '98765-432'),
-		(51679649, 'PeçasDRoupa.com', 'Travessa do Comércio', 'email3@example.com', 'Braga', '54321-678'),
-		(15479563, 'RoupaDelivery', 'Praça da República', 'email4@example.com', 'Coimbra', '87654-321'),
-		(79836214, 'PumaFornecedores', 'Rua dos Lusíadas', 'email5@example.com', 'Faro', '23456-789')
-	;
+INSERT INTO Fornecedor (NIF, for_nome, for_rua, for_email, for_localidade, for_codigopostal)
+VALUES 
+    (10549492, 'EntregaRoup.lda', 'Rua da Liberdade', 'email1@example.com', 'Lisboa', '12345-678'),
+    (51916191, 'Roupa&Roupinha', 'Avenida Infante Dom Henrique', 'email2@example.com', 'Porto', '98765-432'),
+    (51679649, 'PeçasDRoupa.com', 'Travessa do Comércio', 'email3@example.com', 'Braga', '54321-678'),
+    (15479563, 'RoupaDelivery', 'Praça da República', 'email4@example.com', 'Coimbra', '87654-321'),
+    (79836214, 'PumaFornecedores', 'Rua dos Lusíadas', 'email5@example.com', 'Faro', '23456-789');
+
 
 --
 -- DELETE FROM fornecedor;
@@ -115,10 +114,10 @@ INSERT INTO fornecedor
 INSERT INTO PecaDeRoupa 
 	(peca_id, peca_nome, tamanho, stock, cor, peca_descricao, precovenda, promocao, genero_id, tipo_id, marca_id)
 	VALUES 
-		(1, 'Camiseta Branca', 'M', 50, 'Branco', 'Camiseta básica de algodão', 19.99, 0, 3, 1, 1),
+		(1, 'Camiseta Branca', 'M', 50, 'Branco', 'Camiseta básica de algodão', 19.99, NULL, 3, 1, 1),
 		(2, 'Calça Jeans Skinny', '38', 30, 'Azul', 'Calça jeans justa e moderna', 49.99, 1, 2, 2, 2),
-		(3, 'Blazer Preto', 'L', 20, 'Preto', 'Blazer elegante para ocasiões formais', 99.99, 0, 1, 3, 3),
-		(4, 'Vestido Floral', 'S', 15, 'Estampado', 'Vestido com estampa floral romântica', 79.99, 0, 2, 4, 4),
+		(3, 'Blazer Preto', 'L', 20, 'Preto', 'Blazer elegante para ocasiões formais', 99.99, NULL, 1, 3, 3),
+		(4, 'Vestido Floral', 'S', 15, 'Estampado', 'Vestido com estampa floral romântica', 79.99, NULL, 2, 4, 4),
 		(5, 'Moletom Cinza', 'XL', 40, 'Cinza', 'Moletom confortável para dias frios', 59.99, 0, 3, 5, 5),
 		(6, 'Jaqueta de Couro', 'M', 10, 'Preto', 'Jaqueta de couro clássica', 149.99, 0, 2, 6, 1),
 		(7, 'Bermuda Jeans', '32', 25, 'Azul', 'Bermuda jeans casual', 39.99, 0, 1, 7, 2),
@@ -142,7 +141,8 @@ INSERT INTO PecaFornecedor
 		(79.99, '2023-05-17',  20, 3, 51679649),
 		(49.99, '2023-05-18',  30, 4, 15479563),
 		(59.99, '2023-05-19',  25, 5, 79836214)
-	;
+;
+
 --
 -- DELETE FROM PecaFornecedor;
 -- SELECT * FROM PecaFornecedor;
